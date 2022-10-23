@@ -1,23 +1,18 @@
-import { RootState, store } from "store";
+import { store } from "store";
 import { ipc } from "utils";
 
 import "@fontsource/roboto/400.css";
 import "App.css";
 
-import React, { useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
-import { Provider, useDispatch, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import { HashRouter as BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { IpcChannel } from "types/ipc";
 
-import { setBeatSaberLocalMaps } from "store/beatSaber/actions";
-import { setSpotifyAuth, setSpotifyIsLoadTracks, setSpotifyTracks } from "store/spotify/actions";
-
-import { Auth } from "pages/Auth";
-import { LocalMaps } from "pages/LocalMaps";
-import { Settings } from "pages/Settings";
-import { Tracks } from "pages/Tracks";
+import { Dashboard } from "pages/Dashboard";
+import { Alert } from "pages/events/Alert";
 
 import { Navigation } from "components/Navigation";
 
@@ -38,7 +33,7 @@ function Header() {
 				sx={{ height: "var(--header-height)", minHeight: "auto", padding: "0 !important" }}
 				variant="dense">
 				<Typography sx={{ p: 1, fontWeight: "600" }} variant="subtitle1" component="div">
-					Saberfy
+					Neru OSC Controller
 				</Typography>
 				<div className="app-header-hack" />
 				<Button sx={{ minWidth: "35px" }} onClick={onMinimize} size="small" color="inherit">
@@ -53,25 +48,10 @@ function Header() {
 }
 
 function AppWrapper({ children }: { children: React.ReactNode }) {
-	const isAuth = useSelector((state: RootState) => state.spotify.isAuth);
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		ipc.invoke(IpcChannel.clientReady, null).catch(console.error);
-
-		ipc.on(IpcChannel.spotifyAuth, async (evt, isAuth) => {
-			dispatch(setSpotifyAuth(isAuth));
-		});
-
-		ipc.invoke(IpcChannel.beatSaberGetLocalMaps, null).then(result => {
-			dispatch(setBeatSaberLocalMaps(result));
-		});
-	}, []);
-
 	return (
 		<div style={{ height: "100vh" }}>
 			<Header />
-			{isAuth && <Navigation />}
+			<Navigation />
 			{children}
 		</div>
 	);
@@ -108,10 +88,8 @@ function App() {
 					<AppWrapper>
 						<AppBody>
 							<Routes>
-								<Route path="/" element={<Auth />} />
-								<Route path="/app" element={<Tracks />} />
-								<Route path="/settings" element={<Settings />} />
-								<Route path="/local-maps" element={<LocalMaps />} />
+								<Route path="/" element={<Dashboard />} />
+								<Route path="/events/alert" element={<Alert />} />
 							</Routes>
 						</AppBody>
 					</AppWrapper>

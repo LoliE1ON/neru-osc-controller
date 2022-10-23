@@ -1,15 +1,7 @@
 import { BrowserWindow, app } from "electron";
-import { Application } from "main/application";
-import { Spotify } from "spotify";
-import { ipc } from "utils";
-
-import { IpcChannel } from "types/ipc";
 
 import "electron/ipc";
-import { registerAppProtocol } from "electron/utils/registerAppProtocol";
 import { setupDevTools } from "electron/utils/setupDevTools";
-
-require("dotenv").config();
 
 if (require("electron-squirrel-startup")) {
 	app.quit();
@@ -26,7 +18,6 @@ const DEVTOOLS_WIDTH = 500;
 
 let mainWindow: BrowserWindow = null;
 
-registerAppProtocol(app);
 setupDevTools(app, DEVTOOLS_WIDTH);
 
 const createWindow = (): void => {
@@ -58,16 +49,6 @@ const createWindow = (): void => {
 appLock || app.quit();
 
 if (appLock) {
-	app.on("second-instance", (event, commandLine) => {
-		Application.isAuth = Spotify.handleAuth(commandLine);
-		mainWindow.webContents.send(IpcChannel.spotifyAuth, Application.isAuth);
-
-		if (mainWindow) {
-			if (mainWindow.isMinimized()) mainWindow.restore();
-			mainWindow.focus();
-		}
-	});
-
 	app.whenReady().then(() => {
 		createWindow();
 	});

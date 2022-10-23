@@ -20,11 +20,7 @@
 		"^pages/(.*)$",
 		"^components/(.*)$",
 		"^ipc/(.*)$",
-		"^beatSaver/(.*)$",
-		"^beatSaber/(.*)$",
-		"^spotify/(.*)$",
 		"^@mui/(.*)$",
-		"^hooks/(.*)$",
 		"^[./]"
 	]
 }

@@ -1,8 +1,8 @@
 {
-	"name": "saberfy",
-	"productName": "Saberfy",
+	"name": "neru-osc-controller",
+	"productName": "Neru OSC Controller",
 	"version": "2.0.0",
-	"description": "Tool for match and import your Spotify tracks for BeatSaber",
+	"description": "Neru OSC Controller",
 	"main": ".webpack/main",
 	"scripts": {
 		"start": "electron-forge start",
@@ -11,19 +11,14 @@
 		"lint": "eslint --ext .ts,.tsx ."
 	},
 	"keywords": [
-		"BeatSaber",
-		"Spotify"
+		"VRChat",
+		"OSC"
 	],
 	"author": "Loli E1ON",
 	"contributors": [
 		{
 			"name": "E1ON <LoliE1ON>",
 			"url": "https://github.com/LoliE1ON"
-		},
-		{
-			"name": "d0kur0",
-			"email": "dev.dokuro@gmail.com",
-			"url": "https://github.com/d0kur0"
 		}
 	],
 	"license": "MIT",
@@ -34,7 +29,7 @@
 				{
 					"name": "@electron-forge/maker-squirrel",
 					"config": {
-						"name": "Saberfy"
+						"name": "Neru OSC Controller"
 					}
 				},
 				{
@@ -81,14 +76,12 @@
 		"@electron-forge/plugin-webpack": "6.0.0-beta.61",
 		"@trivago/prettier-plugin-sort-imports": "^3.1.1",
 		"@types/axios": "^0.14.0",
-		"@types/dotenv": "^8.2.0",
 		"@types/react": "^17.0.38",
 		"@types/react-dom": "^17.0.11",
 		"@types/react-redux": "^7.1.21",
 		"@types/react-router-dom": "^5.3.2",
 		"@types/redux": "^3.6.0",
 		"@types/redux-logger": "^3.0.9",
-		"@types/unzipper": "^0.10.5",
 		"@typescript-eslint/eslint-plugin": "^4.0.1",
 		"@typescript-eslint/parser": "^4.0.1",
 		"@vercel/webpack-asset-relocator-loader": "1.7.0",
@@ -116,15 +109,12 @@
 		"axios": "^0.24.0",
 		"cross-env": "^7.0.3",
 		"dayjs": "^1.10.7",
-		"dotenv": "^10.0.0",
 		"electron-squirrel-startup": "^1.0.0",
 		"rage-edit": "^1.2.0",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"react-redux": "^7.2.6",
 		"redux": "^4.1.2",
-		"redux-logger": "^3.0.6",
-		"unzipper": "^0.10.11",
-		"vdf": "^0.0.2"
+		"redux-logger": "^3.0.6"
 	}
 }

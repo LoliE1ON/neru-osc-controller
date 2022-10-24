@@ -1,41 +1,45 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
-import GridViewIcon from "@mui/icons-material/GridView";
+import { Cloud, ContentCopy, ContentCut, ContentPaste } from "@mui/icons-material";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
-import { Paper } from "@mui/material";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-
-const bottomStyles = {
-	paddingTop: "12px!important",
-};
+import {
+	Divider,
+	ListItemIcon,
+	ListItemText,
+	MenuItem,
+	MenuList,
+	Paper,
+	Typography,
+} from "@mui/material";
 
 export function Navigation() {
-	const [value, setValue] = React.useState(0);
 	const navigate = useNavigate();
 
 	return (
-		<Paper elevation={0}>
-			<BottomNavigation
-				showLabels
-				value={value}
-				onChange={(event, newValue) => {
-					setValue(newValue);
-				}}>
-				<BottomNavigationAction
-					label="Dashboard"
-					sx={bottomStyles}
-					onClick={() => navigate("/")}
-					icon={<GridViewIcon />}
-				/>
-				<BottomNavigationAction
-					label="Alert"
-					sx={bottomStyles}
-					onClick={() => navigate("/events/alert")}
-					icon={<WarningAmberIcon />}
-				/>
-			</BottomNavigation>
+		<Paper
+			sx={{
+				width: 320,
+				height: "calc(100vh - var(--header-height))",
+				maxWidth: "100%",
+				position: "absolute",
+				top: "30px",
+			}}>
+			<MenuList>
+				<MenuItem disabled={true}>
+					<ListItemText>Events</ListItemText>
+					<Typography variant="body2" color="text.secondary"></Typography>
+				</MenuItem>
+			</MenuList>
+			<MenuList>
+				<MenuItem onClick={() => navigate("/events/alert")}>
+					<ListItemIcon>
+						<WarningAmberIcon fontSize="small" />
+					</ListItemIcon>
+					<ListItemText>Alert</ListItemText>
+					<Typography variant="body2" color="text.secondary"></Typography>
+				</MenuItem>
+			</MenuList>
 		</Paper>
 	);
 }

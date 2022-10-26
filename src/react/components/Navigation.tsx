@@ -1,10 +1,8 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Cloud, ContentCopy, ContentCut, ContentPaste } from "@mui/icons-material";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import {
-	Divider,
 	ListItemIcon,
 	ListItemText,
 	MenuItem,

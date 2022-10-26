@@ -2,10 +2,12 @@ import { useStore } from "@nanostores/react";
 
 import React from "react";
 
-import { alert, setActiveRegion, setRefreshRate } from "store/alert";
+import { alert, setActiveRegion, setEnable, setRefreshRate } from "store/alert";
 
 import {
+	Checkbox,
 	FormControl,
+	FormControlLabel,
 	InputLabel,
 	MenuItem,
 	Select,
@@ -24,6 +26,10 @@ export function Alert() {
 
 	const handleChangeRefreshRate = (event: Event, value: number | number[]) => {
 		setRefreshRate(value as number);
+	};
+
+	const handleChangeEnable = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setEnable(event.target.checked);
 	};
 
 	return (
@@ -66,6 +72,14 @@ export function Alert() {
 						onChange={handleChangeRefreshRate}
 						aria-label="Small"
 						valueLabelDisplay="auto"
+					/>
+				</FormControl>
+
+				<FormControl fullWidth>
+					<FormControlLabel
+						control={<Checkbox defaultChecked />}
+						onChange={handleChangeEnable}
+						label="Enable"
 					/>
 				</FormControl>
 			</Container>

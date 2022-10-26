@@ -1,9 +1,7 @@
-import { atom } from "nanostores";
-
 import { AlertState } from "types/store/alert";
 
-export const alert = atom<AlertState>({
-	enable: false,
+export const alert: AlertState = {
+	enable: true,
 	activeRegion: "Київська область",
 	regions: [
 		"Чернігівська область",
@@ -41,25 +39,4 @@ export const alert = atom<AlertState>({
 		"Одеська область",
 	],
 	refreshRate: 20,
-});
-
-export function setActiveRegion(region: string): void {
-	alert.set({
-		...alert.get(),
-		activeRegion: region,
-	});
-}
-
-export function setRefreshRate(rate: number): void {
-	alert.set({
-		...alert.get(),
-		refreshRate: rate,
-	});
-}
-
-export function setEnable(value: boolean): void {
-	alert.set({
-		...alert.get(),
-		enable: value,
-	});
-}
+};

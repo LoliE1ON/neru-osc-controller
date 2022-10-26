@@ -6,6 +6,8 @@ import { createRoot } from "react-dom/client";
 import { HashRouter as BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { Dashboard } from "pages/Dashboard";
+import { Parameters } from "pages/Parameters";
+import { Settings } from "pages/Settings";
 import { Alert } from "pages/events/Alert";
 
 import { Header } from "components/Header";
@@ -15,6 +17,8 @@ import { Navigation } from "components/Navigation";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+
+import { routes } from "./config/routes";
 
 function AppWrapper({ children }: { children: React.ReactNode }) {
 	return (
@@ -66,7 +70,21 @@ function App() {
 				<AppWrapper>
 					<AppBody>
 						<Routes>
+							{Object.keys(routes).map((key: string, index: number) => {
+								return (
+									<Route
+										// @ts-ignore
+										path={routes[key].pathname}
+										key={index}
+										// @ts-ignore
+										element={routes[key].component}
+									/>
+								);
+							})}
 							<Route path="/" element={<Dashboard />} />
+							<Route path="/parameters" element={<Parameters />} />
+							<Route path="/settings" element={<Settings />} />
+
 							<Route path="/events/alert" element={<Alert />} />
 						</Routes>
 					</AppBody>

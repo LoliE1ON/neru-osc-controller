@@ -1,7 +1,7 @@
 {
 	"name": "neru-osc-controller",
 	"productName": "Neru OSC Controller",
-	"version": "2.0.0",
+	"version": "1.0.0",
 	"description": "Neru OSC Controller",
 	"main": ".webpack/main",
 	"scripts": {
@@ -24,27 +24,15 @@
 	"license": "MIT",
 	"config": {
 		"forge": {
-			"packagerConfig": {},
+			"packagerConfig": {
+				"icon": "./icon.ico"
+			},
 			"makers": [
 				{
 					"name": "@electron-forge/maker-squirrel",
 					"config": {
-						"name": "Neru OSC Controller"
+						"name": "NeruOSCController"
 					}
-				},
-				{
-					"name": "@electron-forge/maker-zip",
-					"platforms": [
-						"darwin"
-					]
-				},
-				{
-					"name": "@electron-forge/maker-deb",
-					"config": {}
-				},
-				{
-					"name": "@electron-forge/maker-rpm",
-					"config": {}
 				}
 			],
 			"plugins": [
@@ -110,6 +98,7 @@
 		"cross-env": "^7.0.3",
 		"dayjs": "^1.10.7",
 		"electron-squirrel-startup": "^1.0.0",
+		"electron-unhandled": "^4.0.1",
 		"nanostores": "^0.7.0",
 		"on-change": "^4.0.1",
 		"osc": "^2.4.3",

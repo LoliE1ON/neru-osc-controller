@@ -15,7 +15,7 @@ jobs:
                   node-version: 16
                   cache: 'npm'
                   cache-dependency-path: package-lock.json
-            - run: npm i
+            - run: npm i --force
             - run: npm run make
             - name: get-npm-version
               id: package-version

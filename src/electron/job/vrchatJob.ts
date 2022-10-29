@@ -1,5 +1,6 @@
 import childProcess from "child_process";
 import cron from "cron";
+import { runJobs, stopJobs } from "job/jobs";
 
 import config from "../config/vrchat.json";
 import { domain } from "../domain";
@@ -20,6 +21,8 @@ new cron.CronJob(
 const setIsRunning = () => {
 	if (!domain.vrchat.isRunning) {
 		domain.vrchat.isRunning = true;
+		runJobs();
+
 		console.log("VRChat is running");
 	}
 };
@@ -27,6 +30,8 @@ const setIsRunning = () => {
 const setIsNotRunning = () => {
 	if (domain.vrchat.isRunning) {
 		domain.vrchat.isRunning = false;
+		stopJobs();
+
 		console.log("VRChat is closed");
 	}
 };

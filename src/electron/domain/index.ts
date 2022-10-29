@@ -23,11 +23,16 @@ const states: Domain = {
 
 export const domain = onChange(states, function () {
 	if (states.application.configPath.length) {
-		fs.writeFileSync(states.application.configPath, JSON.stringify(this));
-		getMainWindow().webContents.send(
-			IpcChannel.sendStore,
-			JSON.parse(JSON.stringify(this))
-		);
+		fs.writeFileSync(states.application.configPath, JSON.stringify(this), {
+			encoding: "utf-8",
+		});
+
+		if (getMainWindow()) {
+			getMainWindow().webContents.send(
+				IpcChannel.sendStore,
+				JSON.parse(JSON.stringify(this))
+			);
+		}
 	}
 });
 

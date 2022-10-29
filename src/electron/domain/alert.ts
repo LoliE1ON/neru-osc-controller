@@ -1,7 +1,7 @@
 import { AlertState } from "types/store/alert";
 
 export const alert: AlertState = {
-	enable: true,
+	enable: false,
 	activeRegion: "Київська область",
 	regions: [
 		"Чернігівська область",

@@ -1,4 +1,5 @@
-import { BrowserWindow, app } from "electron";
+import { BrowserWindow, Menu, Tray, app } from "electron";
+import * as path from "path";
 import { setupConfig, setupDevTools } from "utils";
 
 import "electron/ipc";
@@ -14,6 +15,9 @@ declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 const isDevelopment = !app.isPackaged;
 const appLock = app.requestSingleInstanceLock();
 
+let isQuiting: boolean;
+let tray;
+
 const WINDOW_WIDTH = 1350;
 const WINDOW_HEIGHT = 900;
 const DEVTOOLS_WIDTH = 500;
@@ -21,9 +25,35 @@ const DEVTOOLS_WIDTH = 500;
 let mainWindow: BrowserWindow = null;
 
 setupDevTools(app, DEVTOOLS_WIDTH);
-setupConfig(app);
 
 const createWindow = (): void => {
+	tray = new Tray(path.join(__dirname, "../../icon.png"));
+	tray.setToolTip("Neru OSC Controller");
+
+	tray.on("click", function () {
+		if (!mainWindow.isVisible()) {
+			mainWindow.show();
+		}
+	});
+
+	tray.setContextMenu(
+		Menu.buildFromTemplate([
+			{
+				label: "Neru OSC Controller",
+				click: function () {
+					mainWindow.show();
+				},
+			},
+			{
+				label: "Quit",
+				click: function () {
+					isQuiting = true;
+					app.quit();
+				},
+			},
+		])
+	);
+
 	mainWindow = new BrowserWindow({
 		frame: false,
 		height: WINDOW_HEIGHT,
@@ -32,6 +62,8 @@ const createWindow = (): void => {
 			nodeIntegration: true,
 			contextIsolation: false,
 		},
+		icon: path.join(__dirname, "../../icon.png"),
+		show: false,
 	});
 
 	mainWindow.webContents.session.webRequest.onHeadersReceived((details, callback) => {
@@ -47,13 +79,34 @@ const createWindow = (): void => {
 	mainWindow.setMenu(null);
 
 	isDevelopment && mainWindow.webContents.openDevTools();
+
+	mainWindow.on("minimize", function (event: any) {
+		event.preventDefault();
+		mainWindow.hide();
+	});
+
+	mainWindow.on("close", function (event) {
+		if (!isQuiting) {
+			event.preventDefault();
+			mainWindow.hide();
+			event.returnValue = false;
+		}
+	});
 };
 
 appLock || app.quit();
 
+if (app.isPackaged) {
+	app.setLoginItemSettings({
+		openAtLogin: true,
+		path: app.getPath("exe"),
+	});
+}
+
 if (appLock) {
 	app.whenReady().then(() => {
 		createWindow();
+		setupConfig(app);
 	});
 }
 
@@ -67,4 +120,8 @@ app.on("activate", () => {
 	if (BrowserWindow.getAllWindows().length === 0) {
 		createWindow();
 	}
+});
+
+app.on("before-quit", function () {
+	isQuiting = true;
 });

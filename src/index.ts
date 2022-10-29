@@ -1,4 +1,5 @@
-import { BrowserWindow, Menu, Tray, app } from "electron";
+import { BrowserWindow, Menu, Tray, app, nativeImage } from "electron";
+import unhandled from "electron-unhandled";
 import * as path from "path";
 import { setupConfig, setupDevTools } from "utils";
 
@@ -9,6 +10,8 @@ import "./electron/job/vrchatJob";
 if (require("electron-squirrel-startup")) {
 	app.quit();
 }
+
+unhandled();
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 
@@ -27,7 +30,9 @@ let mainWindow: BrowserWindow = null;
 setupDevTools(app, DEVTOOLS_WIDTH);
 
 const createWindow = (): void => {
-	tray = new Tray(path.join(__dirname, "../../icon.png"));
+	const icon = nativeImage.createFromPath("../icon.png");
+
+	tray = new Tray(icon);
 	tray.setToolTip("Neru OSC Controller");
 
 	tray.on("click", function () {
@@ -62,8 +67,7 @@ const createWindow = (): void => {
 			nodeIntegration: true,
 			contextIsolation: false,
 		},
-		icon: path.join(__dirname, "../../icon.png"),
-		show: false,
+		icon: icon,
 	});
 
 	mainWindow.webContents.session.webRequest.onHeadersReceived((details, callback) => {

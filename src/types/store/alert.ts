@@ -3,4 +3,5 @@ export type AlertState = {
 	activeRegion: string;
 	regions: string[];
 	refreshRate: number;
+	status: boolean;
 };

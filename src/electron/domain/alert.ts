@@ -39,4 +39,5 @@ export const alert: AlertState = {
 		"Одеська область",
 	],
 	refreshRate: 20,
+	status: false,
 };

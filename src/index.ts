@@ -1,11 +1,9 @@
 import { BrowserWindow, app } from "electron";
 import { setupConfig, setupDevTools } from "utils";
 
-import { IpcChannel } from "types/ipc";
-
 import "electron/ipc";
 
-import { domain } from "./electron/domain";
+import "./electron/job/vrchatJob";
 
 if (require("electron-squirrel-startup")) {
 	app.quit();

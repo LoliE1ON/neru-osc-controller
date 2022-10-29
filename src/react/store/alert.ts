@@ -2,13 +2,16 @@ import { atom } from "nanostores";
 
 import { AlertState } from "types/store/alert";
 
-import { syncStore } from "store/syncStore";
+import { syncStore } from "store/store";
+
+const ALERT = "alert";
 
 export const alert = atom<AlertState>({
 	enable: false,
 	activeRegion: "Київська область",
 	regions: ["Київська область"],
 	refreshRate: 20,
+	status: false,
 });
 
 export function setActiveRegion(region: string): void {
@@ -17,7 +20,7 @@ export function setActiveRegion(region: string): void {
 		activeRegion: region,
 	});
 
-	syncStore("alert", alert.get());
+	syncStore(ALERT, alert.get());
 }
 
 export function setRefreshRate(rate: number): void {
@@ -26,7 +29,7 @@ export function setRefreshRate(rate: number): void {
 		refreshRate: rate,
 	});
 
-	syncStore("alert", alert.get());
+	syncStore(ALERT, alert.get());
 }
 
 export function setEnable(value: boolean): void {
@@ -35,7 +38,7 @@ export function setEnable(value: boolean): void {
 		enable: value,
 	});
 
-	syncStore("alert", alert.get());
+	syncStore(ALERT, alert.get());
 }
 
 export function setAlertStore(state: AlertState): void {

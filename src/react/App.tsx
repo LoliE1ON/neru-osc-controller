@@ -10,7 +10,7 @@ import { HashRouter as BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { IpcChannel } from "types/ipc";
 
-import { setAlertStore } from "store/alert";
+import { syncStores } from "store/store";
 
 import { Dashboard } from "pages/Dashboard";
 import { Parameters } from "pages/Parameters";
@@ -26,16 +26,6 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 function AppWrapper({ children }: { children: React.ReactNode }) {
-	useEffect(() => {
-		ipc.invoke(IpcChannel.getStore, null).then(store => {
-			for (const key in store) {
-				if (key === "alert") {
-					setAlertStore(store[key]);
-				}
-			}
-		});
-	}, []);
-
 	return (
 		<div style={{ height: "100vh" }}>
 			<Header />
@@ -60,6 +50,11 @@ function AppBody({ children }: { children: React.ReactNode }) {
 }
 
 function App() {
+	useEffect(() => {
+		ipc.invoke(IpcChannel.getStore, null).then(store => syncStores(store));
+		ipc.on(IpcChannel.sendStore, async (e, store) => syncStores(store));
+	}, []);
+
 	const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
 	const theme = React.useMemo(

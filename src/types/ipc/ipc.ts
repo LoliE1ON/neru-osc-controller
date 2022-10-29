@@ -7,6 +7,7 @@ export enum IpcChannel {
 
 	syncStore = "syncStore",
 	getStore = "getStore",
+	sendStore = "sendStore",
 }
 
 export type IpcEvent = {
@@ -15,6 +16,7 @@ export type IpcEvent = {
 	[IpcChannel.clientMinimize]: null;
 	[IpcChannel.syncStore]: { key: string; store: any };
 	[IpcChannel.getStore]: null;
+	[IpcChannel.sendStore]: Domain;
 };
 
 export type IpcResponse = {
@@ -23,4 +25,5 @@ export type IpcResponse = {
 	[IpcChannel.clientMinimize]: void;
 	[IpcChannel.syncStore]: void;
 	[IpcChannel.getStore]: Domain;
+	[IpcChannel.sendStore]: null;
 };

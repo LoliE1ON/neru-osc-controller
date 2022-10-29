@@ -68,6 +68,7 @@ const createWindow = (): void => {
 			contextIsolation: false,
 		},
 		icon: icon,
+		show: false,
 	});
 
 	mainWindow.webContents.session.webRequest.onHeadersReceived((details, callback) => {

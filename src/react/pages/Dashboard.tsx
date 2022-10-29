@@ -2,14 +2,28 @@ import { useStore } from "@nanostores/react";
 
 import React from "react";
 
+import { alert } from "store/alert";
 import { vrchat } from "store/vrchat";
 
+import { AlertPreview } from "components/dashboard/events/AlertPreview";
+
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import { Stack, Typography } from "@mui/material";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import {
+	Divider,
+	List,
+	ListItem,
+	ListItemIcon,
+	ListItemText,
+	Paper,
+	Stack,
+	Typography,
+} from "@mui/material";
 import Container from "@mui/material/Container";
 
 export function Dashboard() {
 	const vrchatStore = useStore(vrchat);
+	const alertStore = useStore(alert);
 
 	const VrchatIsRunning = () => (
 		<React.Fragment>
@@ -22,7 +36,7 @@ export function Dashboard() {
 
 	const VrchatIsNotRunning = () => (
 		<React.Fragment>
-			<CheckCircleOutlineIcon color={"error"} fontSize={"large"} />
+			<ErrorOutlineIcon color={"error"} fontSize={"large"} />
 			<Typography variant={"h5"} color={"error"}>
 				<b>VRChat</b> is not running
 			</Typography>
@@ -31,10 +45,28 @@ export function Dashboard() {
 
 	return (
 		<div>
-			<Container component={"div"} sx={{ marginTop: 40 }}>
+			<Container component={"div"} sx={{ marginTop: 5 }}>
 				<Stack direction="row" justifyContent="center">
 					{vrchatStore.isRunning ? <VrchatIsRunning /> : <VrchatIsNotRunning />}
 				</Stack>
+
+				{vrchatStore.isRunning ? (
+					<React.Fragment>
+						{" "}
+						<Typography variant={"h6"}>Events</Typography>
+						<Paper elevation={1}>
+							<List dense={true}>
+								<ListItem>
+									<AlertPreview />
+								</ListItem>
+							</List>
+						</Paper>
+					</React.Fragment>
+				) : (
+					<Typography variant={"h6"} align={"center"}>
+						Please, run VRChat for detect events status
+					</Typography>
+				)}
 			</Container>
 		</div>
 	);

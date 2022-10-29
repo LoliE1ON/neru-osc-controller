@@ -1,7 +1,7 @@
 import cron from "cron";
 import { infrastructure } from "infrastructure";
 
-import { domain } from "../domain";
+import { domain } from "../domain/index";
 
 const expressionTemplate = `*/${domain.alert.refreshRate - 1} * * * * *`;
 

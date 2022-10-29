@@ -17,11 +17,15 @@ jobs:
                   cache-dependency-path: package-lock.json
             - run: npm i --force
             - run: npm run make
+            - name: Set the value
+              id: step_one
+              run: |
+                  echo "APP_VERSION=$(cat package.json | sed -n -e '/"version":/ s/^."(.)".*/\1/p')" >> $GITHUB_ENV
             - uses: svenstaro/upload-release-action@v2
               with:
                   repo_token: ${{ secrets.GITHUB_TOKEN }}
-                  file: ./out/make/squirrel.windows/x64/Neru OSC Controller-1.0.0 Setup.exe
-                  asset_name: "NeruOscController_v0.exe"
-                  release_name: "Release v${{ steps.package-version.outputs.current-version}}"
-                  tag: "v${{ steps.package-version.outputs.current-version}}"
+                  file: "./out/make/squirrel.windows/x64/Neru OSC Controller-${{ env.APP_VERSION }} Setup.exe"
+                  asset_name: "NeruOscController_v${{ env.APP_VERSION }}.exe"
+                  release_name: "Release v${{ env.APP_VERSION }}"
+                  tag: "v${{ env.APP_VERSION }}"
                   overwrite: true

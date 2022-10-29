@@ -1,9 +1,16 @@
+import { routes } from "config/routes";
+import { ipc } from "utils";
+
 import "@fontsource/roboto/400.css";
 import "App.css";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { HashRouter as BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { IpcChannel } from "types/ipc";
+
+import { setAlertStore } from "store/alert";
 
 import { Dashboard } from "pages/Dashboard";
 import { Parameters } from "pages/Parameters";
@@ -18,9 +25,17 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-import { routes } from "./config/routes";
-
 function AppWrapper({ children }: { children: React.ReactNode }) {
+	useEffect(() => {
+		ipc.invoke(IpcChannel.getStore, null).then(store => {
+			for (const key in store) {
+				if (key === "alert") {
+					setAlertStore(store[key]);
+				}
+			}
+		});
+	}, []);
+
 	return (
 		<div style={{ height: "100vh" }}>
 			<Header />

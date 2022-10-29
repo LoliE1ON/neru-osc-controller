@@ -78,8 +78,9 @@ export function Alert() {
 				<FormControl fullWidth>
 					<FormControlLabel
 						control={<Checkbox defaultChecked />}
+						defaultChecked={alertStore.enable}
 						onChange={handleChangeEnable}
-						label="Enable"
+						label="Enabled"
 					/>
 				</FormControl>
 			</Container>

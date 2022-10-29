@@ -2,44 +2,12 @@ import { atom } from "nanostores";
 
 import { AlertState } from "types/store/alert";
 
+import { syncStore } from "store/syncStore";
+
 export const alert = atom<AlertState>({
 	enable: false,
 	activeRegion: "Київська область",
-	regions: [
-		"Чернігівська область",
-		"Київська область",
-		"Херсонська область",
-		"Херсонська область",
-		"Львівська область",
-		"Чернівецька область",
-		"Полтавська область",
-		"Миколаївська область",
-		"Хмельницька область",
-		"Тернопільська область",
-		"Житомирська область",
-		"Івано-Франківська область",
-		"Чернігівська область",
-		"Волинська область",
-		"Донецька область",
-		"Одеська область",
-		"Вінницька область",
-		"Дніпропетровська область",
-		"Сумська область",
-		"Закарпатська область",
-		"Рівненська область",
-		"Харківська область",
-		"Кіровоградська область",
-		"Черкаська область",
-		"Запорізька область",
-		"Луганська область",
-		"Автономна Республіка Крим",
-		"Миколаївська область",
-		"Дніпропетровська область",
-		"Миколаївська область",
-		"Дніпропетровська область",
-		"Кіровоградська область",
-		"Одеська область",
-	],
+	regions: ["Київська область"],
 	refreshRate: 20,
 });
 
@@ -48,6 +16,8 @@ export function setActiveRegion(region: string): void {
 		...alert.get(),
 		activeRegion: region,
 	});
+
+	syncStore("alert", alert.get());
 }
 
 export function setRefreshRate(rate: number): void {
@@ -55,11 +25,21 @@ export function setRefreshRate(rate: number): void {
 		...alert.get(),
 		refreshRate: rate,
 	});
+
+	syncStore("alert", alert.get());
 }
 
 export function setEnable(value: boolean): void {
 	alert.set({
 		...alert.get(),
 		enable: value,
+	});
+
+	syncStore("alert", alert.get());
+}
+
+export function setAlertStore(state: AlertState): void {
+	alert.set({
+		...state,
 	});
 }

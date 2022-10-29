@@ -1,7 +1,11 @@
 import { BrowserWindow, app } from "electron";
+import { setupConfig, setupDevTools } from "utils";
+
+import { IpcChannel } from "types/ipc";
 
 import "electron/ipc";
-import { setupDevTools } from "electron/utils/setupDevTools";
+
+import { domain } from "./electron/domain";
 
 if (require("electron-squirrel-startup")) {
 	app.quit();
@@ -19,6 +23,7 @@ const DEVTOOLS_WIDTH = 500;
 let mainWindow: BrowserWindow = null;
 
 setupDevTools(app, DEVTOOLS_WIDTH);
+setupConfig(app);
 
 const createWindow = (): void => {
 	mainWindow = new BrowserWindow({

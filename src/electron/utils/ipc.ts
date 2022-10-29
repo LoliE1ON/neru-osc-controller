@@ -20,5 +20,8 @@ type Ipc = {
 		callback: (event: IpcMainEvent, args: IpcEvent[T]) => Promise<IpcResponse[T]>
 	): void;
 	invoke<T extends IpcChannel>(channel: T, args: IpcEvent[T]): Promise<IpcResponse[T]>;
-	on<T extends IpcChannel>(channel: T, callback: (event: IpcRendererEvent, ...args: IpcEvent[T][]) => void): void;
+	on<T extends IpcChannel>(
+		channel: T,
+		callback: (event: IpcRendererEvent, ...args: IpcEvent[T][]) => void
+	): void;
 };

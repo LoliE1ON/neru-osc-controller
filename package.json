@@ -7,7 +7,7 @@
 	"scripts": {
 		"start": "electron-forge start",
 		"package": "electron-forge package",
-		"make": "cross-env NODE_ENV=production electron-forge make",
+		"make": "cross-env NODE_ENV=production electron-forge make -p win32",
 		"lint": "eslint --ext .ts,.tsx ."
 	},
 	"keywords": [

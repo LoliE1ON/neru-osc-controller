@@ -45,7 +45,7 @@ export function Dashboard() {
 
 	return (
 		<div>
-			<Container component={"div"} sx={{ marginTop: 5 }}>
+			<Container component={"div"} sx={{ marginTop: 10 }}>
 				<Stack direction="row" justifyContent="center">
 					{vrchatStore.isRunning ? <VrchatIsRunning /> : <VrchatIsNotRunning />}
 				</Stack>

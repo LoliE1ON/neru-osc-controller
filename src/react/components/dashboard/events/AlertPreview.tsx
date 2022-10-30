@@ -22,7 +22,9 @@ export function AlertPreview() {
 	const Body = () =>
 		alertStore.status ? (
 			<Typography>
-				<b>Alert</b> is active
+				<Typography component={"span"} mr={2}>
+					<b>Alert</b> is active
+				</Typography>
 				<Chip
 					icon={<LocationOnIcon fontSize={"small"} />}
 					label={alertStore.activeRegion}

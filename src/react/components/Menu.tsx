@@ -39,7 +39,7 @@ export const Menu = () => {
 					icon={<GridViewIcon />}
 				/>
 				<BottomNavigationAction
-					label="Parameters"
+					label="Animation parameters"
 					sx={bottomStyles}
 					onClick={() => navigate("/parameters")}
 					icon={<GrainIcon />}

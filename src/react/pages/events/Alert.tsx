@@ -33,57 +33,55 @@ export function Alert() {
 	};
 
 	return (
-		<div>
-			<Container component={"div"} maxWidth="sm" sx={{ marginTop: 30 }}>
-				<Typography
-					mb={5}
-					variant="h6"
-					align={"center"}
-					id="input-slider"
-					gutterBottom>
-					Alert setting
+		<Container component={"div"} maxWidth="sm" sx={{ marginTop: 20 }}>
+			<Typography
+				mb={5}
+				variant="h6"
+				align={"center"}
+				id="input-slider"
+				gutterBottom>
+				Alert setting
+			</Typography>
+
+			<FormControl fullWidth>
+				<InputLabel id="demo-simple-select-label">Active region</InputLabel>
+				<Select
+					labelId="demo-simple-select-label"
+					id="demo-simple-select"
+					value={alertStore.activeRegion}
+					label="Active region"
+					onChange={handleChangeActiveRegion}>
+					{alertStore.regions.map((region, key) => (
+						<MenuItem key={key} value={region}>
+							{region}
+						</MenuItem>
+					))}
+				</Select>
+			</FormControl>
+
+			<FormControl fullWidth>
+				<Typography mt={3} id="input-slider" gutterBottom>
+					Refresh rate (secs)
 				</Typography>
+				<Slider
+					size="small"
+					min={10}
+					max={60}
+					value={alertStore.refreshRate}
+					onChange={handleChangeRefreshRate}
+					aria-label="Small"
+					valueLabelDisplay="auto"
+				/>
+			</FormControl>
 
-				<FormControl fullWidth>
-					<InputLabel id="demo-simple-select-label">Active region</InputLabel>
-					<Select
-						labelId="demo-simple-select-label"
-						id="demo-simple-select"
-						value={alertStore.activeRegion}
-						label="Active region"
-						onChange={handleChangeActiveRegion}>
-						{alertStore.regions.map((region, key) => (
-							<MenuItem key={key} value={region}>
-								{region}
-							</MenuItem>
-						))}
-					</Select>
-				</FormControl>
-
-				<FormControl fullWidth>
-					<Typography mt={3} id="input-slider" gutterBottom>
-						Refresh rate (secs)
-					</Typography>
-					<Slider
-						size="small"
-						min={10}
-						max={60}
-						value={alertStore.refreshRate}
-						onChange={handleChangeRefreshRate}
-						aria-label="Small"
-						valueLabelDisplay="auto"
-					/>
-				</FormControl>
-
-				<FormControl fullWidth>
-					<FormControlLabel
-						control={<Checkbox />}
-						checked={alertStore.enable}
-						onChange={handleChangeEnable}
-						label="Enabled"
-					/>
-				</FormControl>
-			</Container>
-		</div>
+			<FormControl fullWidth>
+				<FormControlLabel
+					control={<Checkbox />}
+					checked={alertStore.enable}
+					onChange={handleChangeEnable}
+					label="Enabled"
+				/>
+			</FormControl>
+		</Container>
 	);
 }

@@ -25,7 +25,7 @@ export function Navigation() {
 			}}>
 			<MenuList>
 				<MenuItem disabled={true}>
-					<ListItemText>Events</ListItemText>
+					<ListItemText>OSC Events</ListItemText>
 					<Typography variant="body2" color="text.secondary"></Typography>
 				</MenuItem>
 			</MenuList>

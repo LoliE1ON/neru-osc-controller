@@ -44,30 +44,27 @@ export function Dashboard() {
 	);
 
 	return (
-		<div>
-			<Container component={"div"} sx={{ marginTop: 10 }}>
-				<Stack direction="row" justifyContent="center">
-					{vrchatStore.isRunning ? <VrchatIsRunning /> : <VrchatIsNotRunning />}
-				</Stack>
+		<Container component={"div"} sx={{ marginTop: 20 }}>
+			<Stack direction="row" justifyContent="center">
+				{vrchatStore.isRunning ? <VrchatIsRunning /> : <VrchatIsNotRunning />}
+			</Stack>
 
-				{vrchatStore.isRunning ? (
-					<React.Fragment>
-						{" "}
-						<Typography variant={"h6"}>Events</Typography>
-						<Paper elevation={1}>
-							<List dense={true}>
-								<ListItem>
-									<AlertPreview />
-								</ListItem>
-							</List>
-						</Paper>
-					</React.Fragment>
-				) : (
-					<Typography variant={"h6"} align={"center"}>
-						Please, run VRChat for detect events status
-					</Typography>
-				)}
-			</Container>
-		</div>
+			{vrchatStore.isRunning ? (
+				<React.Fragment>
+					<Typography variant={"h6"}>Events</Typography>
+					<Paper elevation={1}>
+						<List dense={true}>
+							<ListItem>
+								<AlertPreview />
+							</ListItem>
+						</List>
+					</Paper>
+				</React.Fragment>
+			) : (
+				<Typography variant={"h6"} align={"center"}>
+					Please, run VRChat for detect events status
+				</Typography>
+			)}
+		</Container>
 	);
 }

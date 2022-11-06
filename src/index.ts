@@ -1,6 +1,5 @@
 import { BrowserWindow, Menu, Tray, app, nativeImage } from "electron";
 import unhandled from "electron-unhandled";
-import * as path from "path";
 import { setupConfig, setupDevTools } from "utils";
 
 import "electron/ipc";

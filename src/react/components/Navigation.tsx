@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
+import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import {
 	ListItemIcon,
@@ -35,6 +36,13 @@ export function Navigation() {
 						<WarningAmberIcon fontSize="small" />
 					</ListItemIcon>
 					<ListItemText>Alert</ListItemText>
+					<Typography variant="body2" color="text.secondary"></Typography>
+				</MenuItem>
+				<MenuItem onClick={() => navigate("/events/system-information")}>
+					<ListItemIcon>
+						<DesktopWindowsIcon fontSize="small" />
+					</ListItemIcon>
+					<ListItemText>System information</ListItemText>
 					<Typography variant="body2" color="text.secondary"></Typography>
 				</MenuItem>
 			</MenuList>

@@ -1,7 +1,7 @@
 {
 	"name": "neru-osc-controller",
 	"productName": "Neru OSC Controller",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"description": "Neru OSC Controller",
 	"main": ".webpack/main",
 	"scripts": {

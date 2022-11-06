@@ -2,38 +2,36 @@ import { useStore } from "@nanostores/react";
 
 import React from "react";
 
-import { alert } from "store/alert";
+import { systemInformation } from "store/systemInformation";
 
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Chip, ListItemIcon, ListItemText, Typography } from "@mui/material";
 
-export function AlertPreview() {
-	const alertStore = useStore(alert);
+export function SystemInformationPreview() {
+	const systemInformationStore = useStore(systemInformation);
 
 	const Icon = () =>
-		alertStore.status ? (
+		systemInformationStore.enable ? (
 			<CheckCircleOutlineIcon color={"primary"} />
 		) : (
 			<ErrorOutlineIcon color={"error"} />
 		);
 
 	const Body = () =>
-		alertStore.status ? (
+		systemInformationStore.enable ? (
 			<Typography>
 				<Typography component={"span"} mr={2}>
-					<b>Alert</b> event is active
+					<b>System information</b> event is active
 				</Typography>
 				<Chip
-					icon={<LocationOnIcon fontSize={"small"} />}
-					label={alertStore.activeRegion}
+					label={`CPU usage: ${systemInformationStore.cpuUsage}%`}
 					variant="outlined"
 				/>
 			</Typography>
 		) : (
 			<Typography>
-				<b>Alert</b> event is not active
+				<b>System information</b> event is not active
 			</Typography>
 		);
 

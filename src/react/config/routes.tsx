@@ -4,6 +4,7 @@ import { Dashboard } from "pages/Dashboard";
 import { Parameters } from "pages/Parameters";
 import { Settings } from "pages/Settings";
 import { Alert } from "pages/events/Alert";
+import { SystemInformation } from "pages/events/SystemInformation";
 
 export const routes = {
 	dashboard: {
@@ -21,5 +22,9 @@ export const routes = {
 	eventAlert: {
 		pathname: "/events/alert",
 		component: <Alert />,
+	},
+	eventSystemInformation: {
+		pathname: "/events/system-information",
+		component: <SystemInformation />,
 	},
 };

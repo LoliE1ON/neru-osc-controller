@@ -4,6 +4,7 @@ import { IpcChannel } from "types/ipc";
 
 import { setAlertStore } from "store/alert";
 import { setApplicationState } from "store/application";
+import { setSystemInformationStore } from "store/systemInformation";
 import { setVrchatStore } from "store/vrchat";
 
 export const syncStore = (key: string, store: any): void => {
@@ -22,6 +23,10 @@ export const syncStores = (store: any): void => {
 
 		if (key === "vrchat") {
 			setVrchatStore(store[key]);
+		}
+
+		if (key === "systemInformation") {
+			setSystemInformationStore(store[key]);
 		}
 	}
 };

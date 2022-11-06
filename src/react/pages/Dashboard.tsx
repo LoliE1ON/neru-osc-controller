@@ -6,11 +6,19 @@ import { alert } from "store/alert";
 import { vrchat } from "store/vrchat";
 
 import { AlertPreview } from "components/dashboard/events/AlertPreview";
-import { SystemInformationPreview } from "components/dashboard/events/SystemInformationPreview";
 
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { List, ListItem, Paper, Stack, Typography } from "@mui/material";
+import {
+	Divider,
+	List,
+	ListItem,
+	ListItemIcon,
+	ListItemText,
+	Paper,
+	Stack,
+	Typography,
+} from "@mui/material";
 import Container from "@mui/material/Container";
 
 export function Dashboard() {
@@ -49,15 +57,12 @@ export function Dashboard() {
 							<ListItem>
 								<AlertPreview />
 							</ListItem>
-							<ListItem>
-								<SystemInformationPreview />
-							</ListItem>
 						</List>
 					</Paper>
 				</React.Fragment>
 			) : (
 				<Typography variant={"h6"} align={"center"}>
-					Please, run VRChat for monitor actually events status
+					Please, run VRChat for detect events status
 				</Typography>
 			)}
 		</Container>

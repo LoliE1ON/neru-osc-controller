@@ -1,13 +1,11 @@
 import { alert } from "domain/alert";
 import { ApplicationState, application } from "domain/application";
-import { systemInformation } from "domain/systemInformation";
 import { VrchatState, vrchat } from "domain/vrchat";
 import fs from "fs";
 import onChange from "on-change";
 
 import { IpcChannel } from "types/ipc";
 import { AlertState } from "types/store/alert";
-import { SystemInformationState } from "types/store/systemInformation";
 
 import { getMainWindow } from "utils/getMainWindow";
 
@@ -15,7 +13,6 @@ const states: Domain = {
 	alert,
 	vrchat,
 	application,
-	systemInformation,
 	setState: (newState: Domain): void => {
 		for (const key in newState) {
 			// @ts-ignore
@@ -43,6 +40,5 @@ export type Domain = {
 	alert: AlertState;
 	vrchat: VrchatState;
 	application: ApplicationState;
-	systemInformation: SystemInformationState;
 	setState: (newState: Domain) => void;
 };

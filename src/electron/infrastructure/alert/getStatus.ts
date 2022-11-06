@@ -1,13 +1,17 @@
-import { browser } from "infrastructure/alert/browser";
+import puppeteer from "puppeteer";
 
 import config from "../../config/alert.json";
 import { domain } from "../../domain";
 
 export const getStatus = async (): Promise<boolean> => {
 	try {
-		const browserInstance = await browser.getInstance();
+		const browser = await puppeteer.launch({
+			headless: true,
+			args: ["--no-sandbox", "--disable-setuid-sandbox"],
+			defaultViewport: { width: 800, height: 600 },
+		});
 
-		const page = await browserInstance.newPage();
+		const page = await browser.newPage();
 
 		await page.goto(config.url, {
 			waitUntil: "networkidle0",

@@ -23,7 +23,7 @@ export function AlertPreview() {
 		alertStore.status ? (
 			<Typography>
 				<Typography component={"span"} mr={2}>
-					<b>Alert</b> event is active
+					<b>Alert</b> is active
 				</Typography>
 				<Chip
 					icon={<LocationOnIcon fontSize={"small"} />}
@@ -33,7 +33,7 @@ export function AlertPreview() {
 			</Typography>
 		) : (
 			<Typography>
-				<b>Alert</b> event is not active
+				<b>Alert</b> is not active
 			</Typography>
 		);
 

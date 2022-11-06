@@ -2,9 +2,5 @@
 	"alert": {
 		"address": "/avatar/parameters/EnableAlert",
 		"type": "i"
-	},
-	"cpuUsage": {
-		"address": "/avatar/parameters/SetCpuUsage",
-		"type": "f"
 	}
 }
